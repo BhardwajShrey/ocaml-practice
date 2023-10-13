@@ -23,5 +23,40 @@ let len_tail_recursive li =
     in
     aux 0 li
 
-let () = print_int (len_tail_recursive [1;2;3;4;5;6;7;8;9;1;2;3;4;5;6;7;8;9;1;2;3;4;5;6;7;8;9;0;1;2;3;4;5;6;7;8;9;0])
+let reverse li =
+    let rec aux acc = function
+        | [] -> acc
+        | x :: xs -> aux (x :: acc) xs
+    in
+    aux [] li
+
+let is_palindrome li = li = reverse li
+
+type 'a node =
+  | One of 'a 
+  | Many of 'a node list
+
+let flatten li =
+    let rec aux acc = function
+        | [] -> acc
+        | x :: xs -> match x with
+            | One(a) -> aux (acc @ [a]) xs
+            | Many(l) -> aux (acc @ aux [] l) xs
+    in
+    aux [] li
+
+let flatten2 list =
+    let rec aux acc = function
+      | [] -> acc
+      | One x :: t -> aux (x :: acc) t
+      | Many l :: t -> aux (aux acc l) t
+    in
+    List.rev (aux [] list)
+
+let rec compress = function
+    | x :: (y :: _ as t) -> if x = y then compress t else x :: compress t
+    | other -> other
+
+let flattened = flatten [One "a"; Many [One "b"; Many [One "c" ;One "d"]; One "e"]]
+let () = List.iter (Printf.printf "%s ") flattened
 let () = print_newline ()
