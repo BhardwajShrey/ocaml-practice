@@ -1,0 +1,6 @@
+(executable
+ (public_name practice)
+ (name main)
+ (libraries practice))
+
+(env (dev (flags :standard -warn-error -27-32)))
