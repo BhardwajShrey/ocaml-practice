@@ -57,6 +57,21 @@ let rec compress = function
     | x :: (y :: _ as t) -> if x = y then compress t else x :: compress t
     | other -> other
 
+let pack li =
+    let rec aux curr acc = function
+        | [] -> []
+        | [x] -> (x :: curr) :: acc
+        | a :: (b :: _ as t) ->
+                if a = b
+                then aux (a :: curr) acc t
+                else aux [] ((a :: curr) :: acc) t
+    in
+    reverse (aux [] [] li)
+
 let flattened = flatten [One "a"; Many [One "b"; Many [One "c" ;One "d"]; One "e"]]
 let () = List.iter (Printf.printf "%s ") flattened
+let () = print_newline ()
+
+let packed = pack ["a"; "a"; "a"; "a"; "b"; "c"; "c"; "a"; "a"; "d"; "d"; "e"; "e"; "e"; "e"]
+let () = List.iter (List.iter (Printf.printf "%s ")) packed
 let () = print_newline ()
