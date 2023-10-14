@@ -78,3 +78,24 @@ let run_length_encoding li =
                 else aux 1 ((a, n) :: acc) t
     in
     reverse (aux 1 [] li)
+
+let run_length_encoding_2 li = List.map (fun l1 -> (List.hd l1, len_tail_recursive l1)) (pack li)
+
+type 'a rle =
+  | One2 of 'a
+  | Many2 of 'a * int
+
+let encode_rle li =
+    let create_tuple ch = function
+        | 1 -> One2(ch)
+        | n -> Many2(ch, n)
+    in
+    let rec aux n acc = function
+        | [] -> []
+        | [x] -> create_tuple x n :: acc
+        | a :: (b :: _ as t) ->
+                if a = b
+                then aux (n + 1) acc t
+                else aux 1 (create_tuple a n :: acc) t
+    in
+    reverse (aux 1 [] li)
