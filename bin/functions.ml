@@ -99,3 +99,24 @@ let encode_rle li =
                 else aux 1 (create_tuple a n :: acc) t
     in
     reverse (aux 1 [] li)
+
+let decode_rle li =
+    let rec n_append c acc = function
+        | 0 -> acc
+        | x -> n_append c (c :: acc) (x - 1)
+    in
+    let rec aux acc = function
+        | [] -> acc
+        | h :: t ->
+                match h with
+                | One2(x) -> aux (x :: acc) t
+                | Many2(c, n) -> aux (n_append c acc n) t
+    in
+    reverse (aux [] li)
+
+let duplicate li =
+    let rec aux acc = function
+        | [] -> []
+        | h :: t -> aux (h :: h :: acc) t
+    in
+    aux [] li
