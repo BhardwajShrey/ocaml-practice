@@ -116,7 +116,7 @@ let decode_rle li =
 
 let duplicate li =
     let rec aux acc = function
-        | [] -> []
+        | [] -> acc
         | h :: t -> aux (h :: h :: acc) t
     in
     aux [] li
