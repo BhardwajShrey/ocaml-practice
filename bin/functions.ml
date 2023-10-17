@@ -139,3 +139,13 @@ let drop_n li n =
         | h :: t -> if i == 1 then aux n t else h :: aux (i - 1) t
     in
     aux n li
+
+let split li n =
+    let rec aux acc i = function
+        | [] -> (reverse acc, [])
+        | h :: t ->
+                if i = 1
+                then (reverse (h :: acc), t)
+                else aux (h :: acc) (i - 1) t
+    in
+    aux [] n li
