@@ -120,3 +120,22 @@ let duplicate li =
         | h :: t -> aux (h :: h :: acc) t
     in
     aux [] li
+
+let duplicate_n li n =
+    let rec repeat_n h acc i =
+        if i = n
+        then acc
+        else repeat_n h (h :: acc) (i + 1)
+    in
+    let rec aux acc = function
+        | [] -> acc
+        | h :: t -> aux (repeat_n h acc 0) t
+    in
+    aux [] (reverse li)
+
+let drop_n li n =
+    let rec aux i = function
+        | [] -> []
+        | h :: t -> if i == 1 then aux n t else h :: aux (i - 1) t
+    in
+    aux n li

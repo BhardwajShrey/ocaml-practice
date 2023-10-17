@@ -22,16 +22,21 @@ let () = print_newline ()
 (* let () = List.iter (List.iter (Printf.printf "%s ")) packed *)
 (* let () = print_newline () *)
 
-let rle_encoded = Functions.encode_rle l1
-let () = print_string "Printing rle_encoded..."
-let () = List.iter (
-    fun item -> match item with
-        | Functions.One2(x) -> Printf.printf "One of %s, " x
-        | Functions.Many2(x, n) -> Printf.printf "Many of %s-%d, " x n
-) rle_encoded
-let () = print_newline ()
+(* let rle_encoded = Functions.encode_rle l1 *)
+(* let () = print_string "Printing rle_encoded..." *)
+(* let () = List.iter ( *)
+(*     fun item -> match item with *)
+(*         | Functions.One2(x) -> Printf.printf "One of %s, " x *)
+(*         | Functions.Many2(x, n) -> Printf.printf "Many of %s-%d, " x n *)
+(* ) rle_encoded *)
+(* let () = print_newline () *)
+(**)
+(* let org = Functions.decode_rle rle_encoded *)
+(* let () = print_string "Reversing rle_encoding..." *)
+(* let () = List.iter (Printf.printf "%s, ") org *)
+(* let () = print_newline () *)
 
-let org = Functions.decode_rle rle_encoded
-let () = print_string "Reversing rle_encoding..."
-let () = List.iter (Printf.printf "%s, ") org
+let n_duplicated = Functions.drop_n [1;2;3;4;1;2;3;4;1;2;3;4;1;2;3;4;1;2;3;4] 4
+let () = print_string "Printing n dropped: "
+let () = List.iter (Printf.printf "%d ") n_duplicated
 let () = print_newline ()
