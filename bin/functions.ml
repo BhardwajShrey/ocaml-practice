@@ -149,3 +149,22 @@ let split li n =
                 else aux (h :: acc) (i - 1) t
     in
     aux [] n li
+
+let slice li i k =
+    let rec aux c = function
+        | [] -> []
+        | _ :: t -> 
+                if c = 1
+                then
+                    let (l1, _) = split t (k - i + 1)
+                    in
+                    l1
+                else aux (c - 1) t
+    in
+    aux i li
+
+let rotate_n li n =
+    let length = len_tail_recursive li in
+    let n_ = n mod length in
+    let (l1, l2) = split li (length - n_) in
+    l2 @ l1

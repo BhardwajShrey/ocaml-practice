@@ -35,8 +35,3 @@ let () = print_newline ()
 (* let () = print_string "Reversing rle_encoding..." *)
 (* let () = List.iter (Printf.printf "%s, ") org *)
 (* let () = print_newline () *)
-
-let n_duplicated = Functions.drop_n [1;2;3;4;1;2;3;4;1;2;3;4;1;2;3;4;1;2;3;4] 4
-let () = print_string "Printing n dropped: "
-let () = List.iter (Printf.printf "%d ") n_duplicated
-let () = print_newline ()
