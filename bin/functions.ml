@@ -168,3 +168,16 @@ let rotate_n li n =
     let n_ = n mod length in
     let (l1, l2) = split li (length - n_) in
     l2 @ l1
+
+let rec remove_at k = function
+    | [] -> []
+    | h :: t -> if k = 0 then t else h :: remove_at (k - 1) t
+
+let rec insert_at s k = function
+    | [] -> s :: []
+    | h :: t -> if k = 0 then s :: h :: t else h :: insert_at s (k - 1) t
+
+let range i k =
+    let rec aux hi lo acc = if hi < lo then acc else aux (hi - 1) lo (hi :: acc)
+    in
+    if i <= k then aux k i [] else reverse (aux i k [])
